@@ -6,20 +6,17 @@ import { ProductUsecase } from "@/domain/usecase/products";
 
 class ProductService implements ProductUsecase {
     constructor(private readonly ProductRepository: ProductUsecase){}
-    Details() {
-        return this.ProductRepository.Details()
+    async GetAll(): Promise<ProductResponse[]> {
+        return await this.ProductRepository.GetAll()
     }
-    GetAll(): ProductResponse[] {
-        return this.ProductRepository.GetAll()
+    async GetOne(code: number): Promise<ProductResponse> {
+        return await this.ProductRepository.GetOne(code)
     }
-    GetOne(code: number): ProductResponse {
-        return this.ProductRepository.GetOne(code)
+    async Delete(code: number) {
+        return await this.ProductRepository.Delete(code)
     }
-    Delete(code: number) {
-        return this.ProductRepository.Delete(code)
-    }
-    Update(code: number, body: ProductUpdate) {
-        return this.ProductRepository.Update(code, body)
+    async Update(code: number, body: ProductUpdate) {
+        return await this.ProductRepository.Update(code, body)
     }
 }
 
