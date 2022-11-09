@@ -4,7 +4,8 @@ import {
     ProductGetAllController, 
     ProductCreateController,
     ProductDeleteController,
-    ProductGetOneController
+    ProductGetOneController,
+    ProductUpdateController
 } from "@/presentation/controllers/Product.controller";
 import { Request, Response, Router } from "express";
 
@@ -38,6 +39,10 @@ export default (router: Router): void => {
         res.status(response.statusCode).json(response.data)
     })
     router.put("/products/:code", async (req:Request, res:Response) => {
-        
+        const repository = new ProductsRepository()
+        const service = new ProductService(repository)
+        const controller = new ProductUpdateController(service)
+        const response = await controller.handle(parseInt(req.params.code), req.body)
+        res.status(response.statusCode).json(response.data)
     })
 }

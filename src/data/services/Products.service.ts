@@ -3,7 +3,7 @@ import {
     ProductScore, 
     ProductUpdate 
 } from "@/domain/entities/products";
-import { DeleteScore } from "@/domain/entities/response";
+import { DeleteScore, UpdateScore } from "@/domain/entities/response";
 import { ProductUsecase } from "@/domain/usecase/products";
 
 class ProductService implements ProductUsecase {
@@ -20,7 +20,7 @@ class ProductService implements ProductUsecase {
     async Delete(code: number): Promise<DeleteScore> {
         return await this.ProductRepository.Delete(code)
     }
-    async Update(code: number, body: ProductUpdate) {
+    async Update(code: number, body: ProductUpdate): Promise<UpdateScore> {
         return await this.ProductRepository.Update(code, body)
     }
 }

@@ -1,5 +1,5 @@
-import { ProductResponse, ProductScore } from "@/domain/entities/products";
-import { DeleteScore } from "@/domain/entities/response";
+import { ProductResponse, ProductScore, ProductUpdate } from "@/domain/entities/products";
+import { DeleteScore, UpdateScore } from "@/domain/entities/response";
 import { ProductUsecase } from "@/domain/usecase/products";
 import { controller } from "../contracts/controller";
 import { ok, serverError, HTTpResponse } from "../contracts/http";
@@ -46,6 +46,18 @@ export class ProductGetOneController implements controller {
         try{
             const product = await this.Product.GetOne(code)
             return ok<ProductResponse>(product)
+        } catch (error) {
+            return serverError(error)
+        }
+    }
+}
+
+export class ProductUpdateController implements controller {
+    constructor(private readonly Product: ProductUsecase){}
+    async handle(code: number, body: ProductUpdate): Promise<HTTpResponse<UpdateScore>> {
+        try{
+            const product = await this.Product.Update(code, body)
+            return ok<UpdateScore>(product)
         } catch (error) {
             return serverError(error)
         }

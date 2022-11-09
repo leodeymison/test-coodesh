@@ -1,5 +1,5 @@
 import { ProductResponse, ProductScore, ProductUpdate } from "@/domain/entities/products"
-import { DeleteScore } from "../entities/response";
+import { DeleteScore, UpdateScore } from "../entities/response";
 
 export interface ProductUsecase {
     // Details(): Promise<any>;
@@ -7,5 +7,5 @@ export interface ProductUsecase {
     GetOne(code: number): Promise<ProductResponse>;
     Create(data: ProductScore): Promise<ProductResponse>;
     Delete(code: number): Promise<DeleteScore>;
-    Update(code: number, body: ProductUpdate): Promise<any>;
+    Update(code: number, body: ProductUpdate): Promise<UpdateScore>;
 }

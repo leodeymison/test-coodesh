@@ -1,5 +1,5 @@
 import { ProductResponse, ProductScore, ProductUpdate } from "@/domain/entities/products";
-import { DeleteScore } from "@/domain/entities/response";
+import { DeleteScore, UpdateScore } from "@/domain/entities/response";
 import { ProductUsecase } from "@/domain/usecase/products";
 import ProductsSchema from "../schema/Products.schema";
 
@@ -33,12 +33,15 @@ class ProductDS implements ProductUsecase {
         });
         return product
     }
-    async Update(code: number, body: ProductUpdate) {
+    async Update(code: number, body: ProductUpdate):Promise<UpdateScore> {
         const product = await ProductsSchema.updateOne({
             where: {
                 code
             }
-        }, body);
+        }, {
+            ...body,
+            last_modified_t: Date.now()
+        });
         return product
     }
 }
