@@ -1,3 +1,3 @@
 export default {
-    PORT: process.env.PORT || 9000
+    PORT: typeof process.env.PORT === "string" ? 9000 : process.env.PORT || 9000
 }
