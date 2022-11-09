@@ -1,8 +1,8 @@
-import { ProductResponse, ProductUpdate } from "@/domain/entities/products";
-import { productInfra } from "@/infra/contracts/products";
+import { ProductResponse, ProductScore, ProductUpdate } from "@/domain/entities/products";
+import { ProductUsecase } from "@/domain/usecase/products";
 import ProductsSchema from "../schema/Products.schema";
 
-class ProductDS implements productInfra {
+class ProductDS implements ProductUsecase {
     async GetAll(): Promise<ProductResponse[]> {
         const product = await ProductsSchema.find<ProductResponse>();
         return product
@@ -13,6 +13,15 @@ class ProductDS implements productInfra {
                 code
             }
         });
+        return product
+    }
+    async Create(data: ProductScore): Promise<ProductResponse> {
+        const product:any = await ProductsSchema.create<ProductResponse>(Object.assign({}, data, {
+            code: Date.now(),
+            created_t: Date.now(),
+            last_modified_t: Date.now(),
+            imported_t: new Date()
+        }));
         return product
     }
     async Delete(code: number) {

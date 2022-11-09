@@ -1,5 +1,4 @@
 export type ProductScore = {
-    code: number;
     status: "draft" | "trash" | "published";
     imported_t: string;
     url: string;
@@ -67,7 +66,7 @@ export type ProductResponse = {
     nutriscore_grade: string;
     main_category: string;
     image_url: string;
-    created_t: 1415302075;
-    last_modified_t: 1572265837
+    created_t: number;
+    last_modified_t: number
 }
  
