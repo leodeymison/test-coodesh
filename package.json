@@ -1,0 +1,10 @@
+{
+  "name": "coodesh",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "leodeymison <leodeymisonbasquete@gmail.com>",
+  "license": "MIT",
+  "_moduleAliases": {
+    "@": "dist"
+  }
+}
