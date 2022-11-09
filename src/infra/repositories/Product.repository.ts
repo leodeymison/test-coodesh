@@ -1,7 +1,7 @@
 import { ProductResponse, ProductUpdate } from "@/domain/entities/products";
 import { ProductUsecase } from "@/domain/usecase/products";
 
-import ProductDS from "../mongodb/dataset/product.ds";
+import ProductDS from "../mongodb/dataset/Product.ds";
 
 class ProductsRepository implements ProductUsecase {
     async Details() {
