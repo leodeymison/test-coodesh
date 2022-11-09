@@ -1,4 +1,5 @@
 import { ProductResponse, ProductScore, ProductUpdate } from "@/domain/entities/products";
+import { DeleteScore } from "@/domain/entities/response";
 import { ProductUsecase } from "@/domain/usecase/products";
 
 import ProductDS from "../mongodb/dataset/Product.ds";
@@ -19,7 +20,7 @@ class ProductsRepository implements ProductUsecase {
         const product = await ProductDS.Create(data)
         return product
     }
-    async Delete(code: number) {
+    async Delete(code: number): Promise<DeleteScore> {
         const product = await ProductDS.Delete(code)
         return product
     }

@@ -1,6 +1,9 @@
 ### GET HOME
 GET http://localhost:9000/api/products
 
+### GET ONE
+GET http://localhost:9000/api/products/1668027669178
+
 ### CREATE
 POST http://localhost:9000/api/products
 Content-Type: application/json
@@ -26,3 +29,6 @@ Content-Type: application/json
    "main_category": "en:madeleines",
    "image_url": "https://static.openfoodfacts.org/images/products/20221126/front_pt.5.400.jpg"
 }
+
+### DELETE
+DELETE http://localhost:9000/api/products/1668026160997

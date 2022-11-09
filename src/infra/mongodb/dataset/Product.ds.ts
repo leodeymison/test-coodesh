@@ -1,4 +1,5 @@
 import { ProductResponse, ProductScore, ProductUpdate } from "@/domain/entities/products";
+import { DeleteScore } from "@/domain/entities/response";
 import { ProductUsecase } from "@/domain/usecase/products";
 import ProductsSchema from "../schema/Products.schema";
 
@@ -24,7 +25,7 @@ class ProductDS implements ProductUsecase {
         }));
         return product
     }
-    async Delete(code: number) {
+    async Delete(code: number): Promise<DeleteScore> {
         const product = await ProductsSchema.deleteOne({
             where: {
                 code
