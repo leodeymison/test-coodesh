@@ -5,7 +5,7 @@ import ProductsSchema from "../schema/Products.schema";
 
 class ProductDS implements ProductUsecase {
     async GetAll(page: number): Promise<Pagination<Array<ProductResponse>>> {
-        const limit = 1
+        const limit = 10
         const skip = limit * (page - 1)
         const allRegisters = (await ProductsSchema.find()).length
         const res = allRegisters / limit
