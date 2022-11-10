@@ -1,5 +1,5 @@
 import { ProductResponse, ProductScore, ProductUpdate } from "@/domain/entities/products";
-import { DeleteScore, UpdateScore } from "@/domain/entities/response";
+import { DeleteScore, Pagination, UpdateScore } from "@/domain/entities/response";
 import { ProductUsecase } from "@/domain/usecase/products";
 
 import ProductDS from "../mongodb/dataset/Product.ds";
@@ -8,8 +8,8 @@ class ProductsRepository implements ProductUsecase {
     async Details() {
         return {}
     }
-    async GetAll(): Promise<Array<ProductResponse>> {
-        const product = await ProductDS.GetAll()
+    async GetAll(page: number): Promise<Pagination<Array<ProductResponse>>> {
+        const product = await ProductDS.GetAll(page)
         return product
     }
     async GetOne(code: number): Promise<ProductResponse> {

@@ -3,13 +3,13 @@ import {
     ProductScore, 
     ProductUpdate 
 } from "@/domain/entities/products";
-import { DeleteScore, UpdateScore } from "@/domain/entities/response";
+import { DeleteScore, Pagination, UpdateScore } from "@/domain/entities/response";
 import { ProductUsecase } from "@/domain/usecase/products";
 
 class ProductService implements ProductUsecase {
     constructor(private readonly ProductRepository: ProductUsecase){}
-    async GetAll(): Promise<ProductResponse[]> {
-        return await this.ProductRepository.GetAll()
+    async GetAll(page: number): Promise<Pagination<Array<ProductResponse>>> {
+        return await this.ProductRepository.GetAll(page)
     }
     async GetOne(code: number): Promise<ProductResponse> {
         return await this.ProductRepository.GetOne(code)

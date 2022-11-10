@@ -1,12 +1,21 @@
 import { ProductResponse, ProductScore, ProductUpdate } from "@/domain/entities/products";
-import { DeleteScore, UpdateScore } from "@/domain/entities/response";
+import { DeleteScore, Pagination, UpdateScore } from "@/domain/entities/response";
 import { ProductUsecase } from "@/domain/usecase/products";
 import ProductsSchema from "../schema/Products.schema";
 
 class ProductDS implements ProductUsecase {
-    async GetAll(): Promise<ProductResponse[]> {
-        const product = await ProductsSchema.find<ProductResponse>();
-        return product
+    async GetAll(page: number): Promise<Pagination<Array<ProductResponse>>> {
+        const limit = 1
+        const skip = limit * (page - 1)
+        const allRegisters = (await ProductsSchema.find()).length
+        const res = allRegisters / limit
+        const cont = (allRegisters / limit) > parseInt(res.toFixed(0)) ? parseInt(res.toFixed(0)) + 1 : res
+        const body = await ProductsSchema.find<ProductResponse>().skip(skip).limit(limit)
+        return {
+            page,
+            quant: cont,
+            body
+        }
     }
     async GetOne(code: number): Promise<ProductResponse> {
         const product = await ProductsSchema.findOne<ProductResponse>({

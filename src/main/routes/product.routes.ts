@@ -10,11 +10,12 @@ import {
 import { Request, Response, Router } from "express";
 
 export default (router: Router): void => {
-    router.get("/products", async (req:Request, res:Response) => {
+    router.get("/products/:page?", async (req:Request, res:Response) => {
+        const page = parseInt(req.params.page) ? parseInt(req.params.page)  : 1
         const repository = new ProductsRepository()
         const service = new ProductService(repository)
         const controller = new ProductGetAllController(service)
-        const response = await controller.handle()
+        const response = await controller.handle(page)
         res.status(response.statusCode).json(response.data)
     })
     router.post("/products", async (req:Request, res:Response) => {
@@ -24,7 +25,7 @@ export default (router: Router): void => {
         const response = await controller.handle(req.body)
         res.status(response.statusCode).json(response.data)
     })
-    router.get("/products/:code", async (req:Request, res:Response) => {
+    router.get("/products/one/:code", async (req:Request, res:Response) => {
         const repository = new ProductsRepository()
         const service = new ProductService(repository)
         const controller = new ProductGetOneController(service)

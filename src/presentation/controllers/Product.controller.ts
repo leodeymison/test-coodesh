@@ -1,15 +1,15 @@
 import { ProductResponse, ProductScore, ProductUpdate } from "@/domain/entities/products";
-import { DeleteScore, UpdateScore } from "@/domain/entities/response";
+import { DeleteScore, Pagination, UpdateScore } from "@/domain/entities/response";
 import { ProductUsecase } from "@/domain/usecase/products";
 import { controller } from "../contracts/controller";
 import { ok, serverError, HTTpResponse } from "../contracts/http";
 
 export class ProductGetAllController implements controller {
     constructor(private readonly Product: ProductUsecase){}
-    async handle(): Promise<HTTpResponse<Array<ProductResponse>>> {
+    async handle(page: number): Promise<HTTpResponse<Pagination<Array<ProductResponse>>>> {
         try{
-            const product = await this.Product.GetAll()
-            return ok<Array<ProductResponse>>(product)
+            const product = await this.Product.GetAll(page)
+            return ok<Pagination<Array<ProductResponse>>>(product)
         } catch (error) {
             return serverError(error)
         }

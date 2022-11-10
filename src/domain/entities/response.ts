@@ -10,3 +10,9 @@ export type UpdateScore = {
     upsertedCount: number;
     matchedCount: number;
 }
+
+export type Pagination<T> = {
+    page: number,
+    quant: number,
+    body: T
+}

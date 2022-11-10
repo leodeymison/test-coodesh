@@ -1,9 +1,9 @@
 import { ProductResponse, ProductScore, ProductUpdate } from "@/domain/entities/products"
-import { DeleteScore, UpdateScore } from "../entities/response";
+import { DeleteScore, Pagination, UpdateScore } from "../entities/response";
 
 export interface ProductUsecase {
     // Details(): Promise<any>;
-    GetAll(): Promise<Array<ProductResponse>>;
+    GetAll(page: number): Promise<Pagination<Array<ProductResponse>>>;
     GetOne(code: number): Promise<ProductResponse>;
     Create(data: ProductScore): Promise<ProductResponse>;
     Delete(code: number): Promise<DeleteScore>;
